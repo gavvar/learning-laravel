@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     public function __construct()
-{
-    $this->middleware('auth');
-    $this->middleware('admin');
-}
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
 
     public function index()
     {
@@ -28,18 +29,28 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // Thêm quy tắc xác thực cho trường price
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'quantity' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:0|max:999999.99', // Thay đổi giới hạn giá trị ở đây
+            'name' => 'required',
+            'description' => 'required',
+            'quantity' => 'required|integer',
+            'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
-        ], [
-            'price.max' => 'The price cannot exceed 999,999.99.',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        Product::create($request->all());
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+        }
+
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'image' => $imagePath
+        ]);
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
@@ -61,19 +72,38 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
             'quantity' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:0|max:999999.99', // Thay đổi giới hạn giá trị ở đây
+            'price' => 'required|numeric|min:0|max:999999.99',
             'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ], [
             'price.max' => 'The price cannot exceed 999,999.99.',
         ]);
 
-        $product->update($request->all());
+        $imagePath = $product->image;
+        if ($request->hasFile('image')) {
+            if ($product->image) {
+                Storage::delete('public/' . $product->image);
+            }
+            $imagePath = $request->file('image')->store('products', 'public');
+        }
+
+        $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'image' => $imagePath
+        ]);
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
     public function destroy(Product $product)
     {
+        if ($product->image) {
+            Storage::delete('public/' . $product->image);
+        }
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');

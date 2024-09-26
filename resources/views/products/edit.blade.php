@@ -1,42 +1,47 @@
-<!-- resources/views/products/edit.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
-    <h1 class="mb-4">Edit Product</h1>
-    <form action="{{ route('products.update', $product->id) }}" method="POST">
+<div class="container">
+    <h1>Sửa sản phẩm</h1>
+    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ $product->name }}" required>
+        <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}" required>
         </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="description" class="form-control">{{ $product->description }}</textarea>
+        <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" id="description" name="description"
+                required>{{ $product->description }}</textarea>
         </div>
-        <div class="mb-3">
-            <label for="quantity" class="form-label">Quantity</label>
-            <input type="number" name="quantity" id="quantity" class="form-control" value="{{ $product->quantity }}"
+        <div class="form-group">
+            <label for="quantity">Số lượng</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $product->quantity }}"
                 required>
         </div>
-        <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
-            <input type="number" name="price" id="price" class="form-control" step="0.01" value="{{ $product->price }}"
-                required>
+        <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}" required>
         </div>
-        <div class="mb-3">
-            <label for="category_id" class="form-label">Category</label>
-            <select name="category_id" id="category_id" class="form-select" required>
+        <div class="form-group">
+            <label for="category_id">Danh mục</label>
+            <select class="form-control" id="category_id" name="category_id" required>
                 @foreach($categories as $category)
                 <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
-                    {{ $category->name }}
-                </option>
+                    {{ $category->name }}</option>
                 @endforeach
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <div class="form-group">
+            <label for="image">Ảnh sản phẩm</label>
+            <input type="file" class="form-control-file" id="image" name="image">
+            @if($product->image)
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-thumbnail mt-2"
+                width="150">
+            @endif
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
     </form>
 </div>
 @endsection
