@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <h2 class="mb-4">Featured Products</h2>
+    <h2 class="mb-4">Sản Phẩm</h2>
 
     @if(session('success'))
     <div class="alert alert-success">
@@ -25,12 +25,12 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $product->name }}</h5>
                     <p class="card-text">${{ $product->price }}</p>
-                    @auth
+
                     <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-outline-primary">Add to Cart</button>
                     </form>
-                    @endauth
+
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
     </div>
     @else
     <p>No products available.</p>
-    <a href="{{ route('welcome') }}" class="btn btn-primary">Continue Shopping</a>
+    <a href="{{ route('home') }}" class="btn btn-primary">Continue Shopping</a>
     @endif
 </div>
 @endsection

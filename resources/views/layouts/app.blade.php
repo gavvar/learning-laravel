@@ -48,6 +48,9 @@
                         <a class="nav-link" href="{{ route('cart.index') }}">Cart</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('orders.index') }}">My Orders</a>
+                    </li>
+                    <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" class="form-inline">
                             @csrf
                             <button class="btn btn-link nav-link" type="submit">Logout</button>

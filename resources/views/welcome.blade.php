@@ -1,8 +1,8 @@
-<!-- resources/views/welcome.blade.php -->
+<!-- resources/views/home.blade.php -->
 @extends('layouts.app')
 
 @section('content')
-<h1 class="text-center mt-5">Welcome to Laravel with Bootstrap</h1>
+<h1 class="text-center mt-5">home to Laravel with Bootstrap</h1>
 <p class="text-center">This is a sample text using Bootstrap styling.</p>
 
 <div class="row">

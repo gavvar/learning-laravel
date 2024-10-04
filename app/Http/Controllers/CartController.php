@@ -1,61 +1,59 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    // Hiển thị giỏ hàng
-    public function index() {
+    public function index()
+    {
         $cart = session()->get('cart', []);
         return view('cart.index', compact('cart'));
     }
 
-    // Thêm sản phẩm vào giỏ hàng
-    public function add(Request $request, Product $product) {
+    public function add(Request $request, Product $product)
+    {
         $cart = session()->get('cart', []);
 
-        if(isset($cart[$product->id])) {
+        if (isset($cart[$product->id])) {
             $cart[$product->id]['quantity']++;
         } else {
             $cart[$product->id] = [
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "category" => $product->category->name
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => 1,
+                'category' => $product->category->name, // Assuming you have a category relationship
             ];
         }
 
         session()->put('cart', $cart);
-        return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng.');
+
+        return redirect()->route('cart.index')->with('success', 'Product added to cart!');
     }
 
-    // Xóa sản phẩm khỏi giỏ hàng
-    public function remove(Product $product) {
+    public function remove(Product $product)
+    {
         $cart = session()->get('cart', []);
 
-        if(isset($cart[$product->id])) {
+        if (isset($cart[$product->id])) {
             unset($cart[$product->id]);
             session()->put('cart', $cart);
         }
 
-        return redirect()->route('cart.index')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
+        return redirect()->route('cart.index')->with('success', 'Product removed from cart!');
     }
 
-    // Cập nhật số lượng sản phẩm trong giỏ hàng
-    public function update(Request $request, $id) {
-        if($request->has('quantity') && $request->quantity > 0) {
-            $cart = session()->get('cart');
+    public function update(Request $request, $id)
+    {
+        $cart = session()->get('cart', []);
 
-            if(isset($cart[$id])) {
-                $cart[$id]['quantity'] = $request->quantity;
-                session()->put('cart', $cart);
-                return redirect()->route('cart.index')->with('success', 'Giỏ hàng đã được cập nhật!');
-            }
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = $request->quantity;
+            session()->put('cart', $cart);
         }
 
-        return redirect()->route('cart.index')->with('error', 'Cập nhật thất bại!');
+        return redirect()->route('cart.index')->with('success', 'Cart updated!');
     }
 }

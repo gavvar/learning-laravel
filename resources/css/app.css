@@ -3,3 +3,10 @@
     height: 150px;
     object-fit: cover;
 }
+.quantity-input {
+    width: 60px; /* Đảm bảo tất cả các ô input có cùng chiều rộng */
+    height: 30px; /* Đảm bảo cùng chiều cao */
+    text-align: center; /* Canh giữa chữ */
+    padding: 0; /* Bỏ padding để không bị ảnh hưởng */
+    box-sizing: border-box; /* Đảm bảo kích thước không bị thay đổi bởi padding hoặc border */
+}
