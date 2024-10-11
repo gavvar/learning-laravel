@@ -5,7 +5,7 @@
 @section('content')
 <h1 class="mb-4">Create Category</h1>
 
-<form action="{{ route('categories.store') }}" method="POST">
+<form action="{{ route('admin.categories.store') }}" method="POST">
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Category Name</label>

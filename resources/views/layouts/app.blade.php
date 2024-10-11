@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Laravel App</title>
+    <title>Admin Dashboard - My Laravel App</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -23,32 +23,27 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="{{ route('home') }}">Máy hút mùi</a>
+            <a class="navbar-brand" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
+
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.index') }}">Products</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0" action="{{ route('products.index') }}" method="GET">
-                    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav ml-auto">
-                    @auth
-                    //cart
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cart.index') }}">Cart</a>
+                        <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.orders.index') }}">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.reports.index') }}">Reports</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @auth
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" class="form-inline">
                             @csrf

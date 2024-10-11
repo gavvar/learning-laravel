@@ -30,10 +30,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.index') }}">Products</a>
 
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
                     </li>

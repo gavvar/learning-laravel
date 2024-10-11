@@ -10,6 +10,6 @@
     <p><strong>Quantity:</strong> {{ $product->quantity }}</p>
     <p><strong>Price:</strong> ${{ $product->price }}</p>
     <p><strong>Category:</strong> {{ $product->category->name }}</p>
-    <a href="{{ route('products.index') }}" class="btn btn-secondary">Back to List</a>
+    <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">Back to List</a>
 </div>
 @endsection

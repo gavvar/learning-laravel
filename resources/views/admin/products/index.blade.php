@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 <!-- Sử dụng layout admin -->
 
 @section('content')
 <div class="container mt-5">
-    <h1 class="mb-4">Danh sách sản phẩm</h1>
+    <h1 class="mb-4">Danh sách sản phẩm 2</h1>
     <a href="{{ route('admin.products.create') }}" class="btn btn-primary mb-3">Thêm sản phẩm</a>
     @if(session('success'))
     <div class="alert alert-success">

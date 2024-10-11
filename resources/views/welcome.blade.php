@@ -1,5 +1,5 @@
 <!-- resources/views/home.blade.php -->
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('content')
 <h1 class="text-center mt-5">home to Laravel with Bootstrap</h1>

@@ -8,7 +8,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
-class ProductController extends Controller
+class ProductControllerAdmin extends Controller
 {
     public function __construct()
     {
@@ -27,7 +27,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all(); // Lấy danh sách danh mục
-        return view('admin.products.create', compact('categories')); // Trả về view tạo sản phẩm
+         return view('admin.products.create', compact('categories')); // Trả về view tạo sản phẩm
+        
     }
 
     // Lưu sản phẩm mới vào cơ sở dữ liệu

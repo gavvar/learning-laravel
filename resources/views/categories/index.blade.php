@@ -10,15 +10,15 @@
 
 <body class="container mt-5">
     <h1 class="mb-4">Category List</h1>
-    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Create New Category</a>
+    <a href="{{ route('admin.categories.create') }}" class="btn btn-primary mb-3">Create New Category</a>
     <ul class="list-group">
         @foreach ($categories as $category)
         <li class="list-group-item d-flex justify-content-between align-items-center">
             {{ $category->name }}
             <div>
-                <a href="{{ route('categories.show', $category->id) }}" class="btn btn-info btn-sm">View</a>
-                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline">
+                <a href="{{ route('admin.categories.show', $category->id) }}" class="btn btn-info btn-sm">View</a>
+                <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
