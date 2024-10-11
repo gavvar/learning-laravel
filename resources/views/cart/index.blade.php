@@ -18,12 +18,11 @@
     <form action="{{ route('checkout') }}" method="POST" id="checkout-form">
         @csrf
         <div class="row">
-            <!-- Điều chỉnh phần bảng rộng hơn -->
             <div class="col-md-9">
                 <table class="table table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <th style="width: 5%"></th> <!-- Checkbox column -->
+                            <th style="width: 5%"></th>
                             <th style="width: 35%">Tên sản phẩm</th>
                             <th style="width: 15%">Số lượng</th>
                             <th style="width: 15%">Giá</th>
@@ -71,7 +70,6 @@
                 </table>
             </div>
 
-            <!-- Điều chỉnh phần tổng tiền nhỏ lại -->
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
@@ -81,7 +79,21 @@
                                 id="total-price">{{ number_format($total, 0) }}</span> $</p>
                         <p class="card-text">Tạm tính: <span id="sub-total">{{ number_format($total, 0) }}</span> $</p>
                         <h4>Thành tiền: <span id="final-total">{{ number_format($total, 0) }}</span> $</h4>
-                        <button type="submit" class="btn btn-dark btn-block">Đặt hàng</button>
+
+                        <!-- Phương thức thanh toán -->
+                        <form action="{{ route('checkout') }}" method="POST" id="checkout-form">
+                            @csrf
+                            <div class="form-group">
+                                <label for="payment_method">Phương thức thanh toán:</label>
+                                <select name="payment_method" id="payment_method" class="form-control">
+                                    <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                                    <option value="online">Thanh toán trực tuyến</option>
+                                </select>
+                            </div>
+                            <!-- Các trường khác trong form -->
+                            <button type="submit" class="btn btn-dark btn-block">Đặt hàng</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -89,10 +101,11 @@
     </form>
     @else
     <p>Giỏ hàng của bạn trống.</p>
-    <a href="{{ route('home') }}" class="btn btn-primary">Tiếp tục mua sắm</a> <!-- Sửa lại route này -->
+    <a href="{{ route('home') }}" class="btn btn-primary">Tiếp tục mua sắm</a>
     @endif
 </div>
 @endsection
+
 
 @section('scripts')
 <script>

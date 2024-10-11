@@ -38,7 +38,7 @@
     </div>
     @else
     <p>No products available.</p>
-    <a href="{{ route('home') }}" class="btn btn-primary">Continue Shopping</a>
+    <a href="{{ route('welcome') }}" class="btn btn-primary">Continue Shopping</a>
     @endif
 </div>
 @endsection

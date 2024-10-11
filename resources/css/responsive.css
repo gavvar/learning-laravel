@@ -1,0 +1,61 @@
+/* responsive.css */
+
+/* Quy tắc cho màn hình dưới 576px (mobile nhỏ) */
+@media (max-width: 576px) {
+    .btn {
+        font-size: 12px;
+    }
+
+    .table {
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+/* Quy tắc cho màn hình từ 576px đến 768px (mobile lớn) */
+@media (min-width: 576px) and (max-width: 768px) {
+    .btn {
+        font-size: 14px;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+}
+
+/* Quy tắc cho màn hình từ 768px đến 992px (tablet) */
+@media (min-width: 768px) and (max-width: 992px) {
+    .btn {
+        font-size: 16px;
+    }
+
+    .table {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+}
+
+/* Quy tắc cho màn hình từ 992px trở lên (desktop) */
+@media (min-width: 992px) {
+    .btn {
+        font-size: 18px;
+    }
+
+    .table {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+}

@@ -6,6 +6,15 @@
     <p><strong>Mã đơn hàng:</strong> {{ $order->id }}</p>
     <p><strong>Trạng thái:</strong> {{ $order->status }}</p>
     <p><strong>Tổng tiền:</strong> {{ number_format($order->total, 0) }} $</p>
+
+    <!-- Thêm thông tin phương thức thanh toán -->
+    <p><strong>Phương thức thanh toán:</strong> {{ $order->payment->payment_method ?? 'Chưa có thông tin' }}</p>
+    <!-- Kiểm tra nếu payment không null -->
+
+    <!-- Thêm thông tin ngày thanh toán -->
+    <p><strong>Ngày thanh toán:</strong> {{ $order->payment->payment_date ?? 'Chưa có thông tin' }}</p>
+    <!-- Kiểm tra nếu payment không null -->
+
     <table class="table table-bordered">
         <thead>
             <tr>
