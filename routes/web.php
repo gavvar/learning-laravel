@@ -46,7 +46,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/orders/{order}', [\App\Http\Controllers\Admin\OrderControlleradmin::class, 'show'])->name('admin.orders.show');
 
     // Route quản lý báo cáo
-    Route::get('/reports', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('admin.reports.index');
+   Route::get('/reports', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('admin.reports.index');
 });
 
 // Route cho người dùng (đăng ký, đăng nhập và đăng xuất)
@@ -86,3 +86,5 @@ Route::get('/product/{id}', [ProductControllerAdmin::class, 'show'])->name('prod
 Route::get('/welcome', function () {
     return view('welcome');
 });
+//route product cho khach hang
+Route::get('/products', [ProductControllerAdmin::class, 'show'])->name('product.show');
